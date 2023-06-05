@@ -19,37 +19,37 @@ https://openai.451024.xyz
 https://openai-proxy-api.pages.dev/api
 ```
 
-### 演示站为公共服务，如有大规模使用需求请自行部署，演示站有点不堪重负
+### The demo station is a public service. If you need to use it on a large scale, please deploy it yourself. The demo station is a bit overwhelmed
 
 ![worker](./docs/img/worker.png)
 
-## 1、利用Cloudflare Worker中转api.openai.com
+## 1、Use Cloudflare Worker to transfer api.openai.com
 
-1. 新建一个 Cloudflare Worker
-2. 复制 [cf_worker.js](https://cdn.jsdelivr.net/gh/x-dr/chatgptProxyAPI@main/cf_worker.js)  里的代码粘贴到 Worker 中并部署
-3. 给 Worker 绑定一个没有被墙的域名
-4. 使用自己的域名代替 api.openai.com
-
-
-**[详细教程](./docs/cloudflare_workers.md)**
+1. Create a new Cloudflare Worker
+2. Copy the code in [cf_worker.js](https://cdn.jsdelivr.net/gh/x-dr/chatgptProxyAPI@main/cf_worker.js) and paste it into Worker and deploy it
+3. Bind a domain name to Worker that is not blocked
+4. Use your own domain name instead of api.openai.com
 
 
-## 2、使用CloudFlare Pages进行中转
+**[Detailed tutorial](./docs/cloudflare_workers.md)**
 
-**[详细教程](./docs/cloudflare_proxy_pages.md)**
 
-## 3、利用nextjs edge中转api.openai.com
+## 2. Use CloudFlare Pages for transfer
 
-### 利用Cloudflare pages部署
+**[Detailed tutorial](./docs/cloudflare_proxy_pages.md)**
 
-> [官方文档](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
+## 3. Use nextjs edge to transfer to api.openai.com
 
-1. ~~Fork本项目~~ 点击[Use this template](https://github.com/x-dr/chatgptProxyAPI/generate)按钮创建一个新的代码库。
-2. 登录到[Cloudflare](https://dash.cloudflare.com/)控制台.
-3. 在帐户主页中，选择`pages`> ` Create a project` > `Connect to Git`
-4. 选择你 Fork 的项目存储库，在`Set up builds and deployments`部分中，选择`Next.js`作为您的框架预设。您的选择将提供以下信息。
+### Deploy with Cloudflare pages
 
- > ~~一般默认即可~~
+> [Official Documentation](https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/)
+
+1. ~~Fork this project~~ Click the [Use this template](https://github.com/x-dr/chatgptProxyAPI/generate) button to create a new code base.
+2. Log in to the console of [Cloudflare](https://dash.cloudflare.com/).
+3. From the account home page, select `pages` > `Create a project` > `Connect to Git`
+4. Select your Fork's project repository, and in the `Set up builds and deployments` section, select `Next.js` as your framework preset. Your selection will provide the following information.
+
+> ~~General default is enough~~
 
 |  Configuration option	   | Value  |
 |  ----  | ----  |
@@ -59,24 +59,24 @@ https://openai-proxy-api.pages.dev/api
 | Build directory  | .vercel/output/static|
 
 
-> 在 `Environment variables (advanced)`添加一个参数
+> Add a parameter in `Environment variables (advanced)`
 
 |  Variable name	   | Value  |
 |  ----  | ----  |
 | NODE_VERSION   | 16 |
 
-5. 点击`Save and Deploy`部署，然后点`Continue to project`即可看到访问域名
+5. Click `Save and Deploy` to deploy, then click `Continue to project` to see the access domain name
 
 
-> 把官方接口的`https://api.openai.com`替换为`https://xxx.pages.dev/api` 即可 (https://xxx.pages.dev/api 为你的域名)
+> Replace `https://api.openai.com` of the official interface with `https://xxx.pages.dev/api` (https://xxx.pages.dev/api is your domain name)
 
-*注意路径多了一个`api`*
+*Note that there is an additional `api` in the path*
 
-**[详细教程](./docs/cloudflare_pages.md)**
+**[Detailed tutorial](./docs/cloudflare_pages.md)**
 
-### docker 部署（要境外vps） 
+### docker deployment (overseas vps required)
 
-> 好像不支持sse 所以不建议
+> It seems that sse is not supported, so it is not recommended
 
 <details>
 
@@ -89,7 +89,7 @@ docker run -itd --name openaiproxy \
            gindex/openaiproxy:latest
 ```
 
-#### 使用
+#### use
 
 *api : http://vpsip:3000/proxy/v1/chat/completions*
 
@@ -108,7 +108,7 @@ curl --location 'http://vpsip:3000/proxy/v1/chat/completions' \
 
 
 
-## 用法
+## Usage
 
 
 <details>
@@ -171,13 +171,13 @@ payload = {
 
 try:
     response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status() # 抛出异常，如果响应码不是200
+    response.raise_for_status() # Throw an exception if the response code is not 200
     data = response.json()
     print(data)
 except requests.exceptions.RequestException as e:
-    print(f"请求错误: {e}")
+    print(f"Request error: {e}")
 except json.JSONDecodeError as e:
-    print(f"无效的 JSON 响应: {e}")
+    print(f"Invalid JSON response: {e}")
 ```
 
 </details>
@@ -185,7 +185,7 @@ except json.JSONDecodeError as e:
 
 
 <details>
-<summary>用nodejs chatgpt库</summary>
+<summary>Using nodejs chatgpt library</summary>
 
 [transitive-bullshit/chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
 
@@ -215,14 +215,14 @@ example()
 
 <details>
 
-<summary>查询余额</summary>
+<summary>Check balance</summary>
 
 ```javascript
     const headers = {
       'content-type': 'application/json',
       'Authorization': `Bearer sk-xxxxxxxxxxxxxxxxx`
     }
-    // 查是否订阅
+    // Check whether to subscribe
     const subscription = await fetch("https://openai.1rmb.tk/v1/dashboard/billing/subscription", {
       method: 'get',
       headers: headers
@@ -235,7 +235,7 @@ example()
     } else {
       const subscriptionData = await subscription.json()
       const endDate = subscriptionData.access_until
-      const startDate = new Date(endDate - 90 * 24 * 60 * 60);
+      const startDate = new Date(endDate -- 90*24*60*60);
       console.log(formatDate(endDate, "YYYY-MM-DD"));
       console.log(formatDate(startDate, "YYYY-MM-DD"));
       const response = await fetch(`https://openai.1rmb.tk/v1/dashboard/billing/usage?start_date=${formatDate(startDate, "YYYY-MM-DD")}&end_date=${formatDate(endDate, "YYYY-MM-DD")}`, {
@@ -244,7 +244,7 @@ example()
       })
       
       const usageData = await response.json();
-      // 账号类型
+      // account type
       const plan = subscriptionData.plan.id
       console.log(usageData);
       }
