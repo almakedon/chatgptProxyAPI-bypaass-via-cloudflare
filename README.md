@@ -1,5 +1,5 @@
 
->  新项目 [基于OpenAI的微信机器人](https://github.com/x-dr/wechat-bot)
+>  New project WeChat robot [based on OpenAI](https://github.com/x-dr/wechat-bot)
 
 ### Demo
 
