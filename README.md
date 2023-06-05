@@ -113,7 +113,7 @@ curl --location 'http://vpsip:3000/proxy/v1/chat/completions' \
 
 <details>
 
-<summary>JavaScript用fetch</summary>
+<summary>JavaScript for fetch</summary>
 
 ```javascript
 const requestOptions = {
@@ -146,7 +146,7 @@ fetch("https://openai.1rmb.tk/v1/chat/completions", requestOptions)
 
 <details>
 
-<summary>用python</summary>
+<summary>For python</summary>
 
 ```python
 import requests
